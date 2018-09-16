@@ -7,7 +7,7 @@
     "password",
     "utilities"
   ],
-  "license": "DBAD",
+  "license": "MIT",
   "authors": [
     {
       "name": "Andrei Pietrusel",
