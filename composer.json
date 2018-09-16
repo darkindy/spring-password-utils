@@ -1,29 +1,34 @@
 {
-    "name": "darkindy/spring-password-utils",
-    "description": "PHP utilities for encoding and validating passwords in the same way as Spring Security's StandardPasswordEncoder in Java.",
-    "keywords": ["java", "spring", "password", "utilities"],
-    "license": "DBAD",
-    "authors": [
-        {
-            "name": "Andrei Pietrusel",
-            "email": "andreipietrusel@gmail.com"
-        }
-    ],
-    "type": "project",
-    "require": {
-		"php": "^7.1"
-    },
-    "require-dev": {
-		"phpunit/phpunit": "6.*"
-    },
-    "autoload": {
-        "psr-4": {
-            "Darkindy\\SpringPasswordUtils\\": "src/"
-        }
-    },
-	"scripts": {
-		"test": [
-			"phpunit --verbose --configuration phpunit.xml"
-		]
-	}
+  "name": "darkindy/spring-password-utils",
+  "description": "PHP utilities for encoding and validating passwords in the same way as Spring Security's StandardPasswordEncoder in Java.",
+  "keywords": [
+    "java",
+    "spring",
+    "password",
+    "utilities"
+  ],
+  "license": "DBAD",
+  "authors": [
+    {
+      "name": "Andrei Pietrusel",
+      "email": "andreipietrusel@gmail.com"
+    }
+  ],
+  "type": "project",
+  "require": {
+    "php": "^7.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "6.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Darkindy\\SpringPasswordUtils\\": "src/"
+    }
+  },
+  "scripts": {
+    "test": [
+      "phpunit --verbose --configuration phpunit.xml"
+    ]
+  }
 }
