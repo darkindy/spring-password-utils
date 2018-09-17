@@ -11,12 +11,12 @@ use PHPUnit\Framework\TestCase;
  */
 class StandardPasswordEncoderTest extends TestCase
 {
-    private const ENCODED_PASSWORD = "1ee070812605db4ab1950813a042717eb3f0bdf8395bac71d3eb9b8eeefcd5e86626731b2d41c864";
-    private const RAW_PASSWORD = "1234";
+    const ENCODED_PASSWORD = "1ee070812605db4ab1950813a042717eb3f0bdf8395bac71d3eb9b8eeefcd5e86626731b2d41c864";
+    const RAW_PASSWORD = "1234";
 
-    private const PASSWORD_TO_ENCODE = "Darkindyß";
-    private const EXPECTED_ENCODED_PASSWORD = "a840d8c14f8695b51fe596a8ed6e156934460f2637efcc86f6930905deec2578929b6dad2f5ca021";
-    private const EXPECTED_ENCODED_PASSWORD2 = "4fd886b595a840c1a840d8c14f8695b5d7405efe604c9cbab3dda679752a8c36d0da8d3d3d6c15bf9843fde10f8faf9b";
+    const PASSWORD_TO_ENCODE = "Darkindyß";
+    const EXPECTED_ENCODED_PASSWORD = "a840d8c14f8695b51fe596a8ed6e156934460f2637efcc86f6930905deec2578929b6dad2f5ca021";
+    const EXPECTED_ENCODED_PASSWORD2 = "4fd886b595a840c1a840d8c14f8695b5d7405efe604c9cbab3dda679752a8c36d0da8d3d3d6c15bf9843fde10f8faf9b";
 
     private static function SALT_TO_ENCODE()
     {

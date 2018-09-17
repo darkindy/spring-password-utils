@@ -10,9 +10,9 @@ namespace Darkindy\SpringPasswordUtils;
 class StandardPasswordEncoder
 {
 
-    private const HASH_ALGORITHM = 'SHA256';
-    private const HASH_ITERATIONS = 1024;
-    private const HASH_LENGTH = 80;
+    const HASH_ALGORITHM = 'SHA256';
+    const HASH_ITERATIONS = 1024;
+    const HASH_LENGTH = 80;
 
     /**
      * Checks if the given password matches a previously computed encoded password, thus validating authentication.
@@ -26,7 +26,7 @@ class StandardPasswordEncoder
      */
     public function matches($rawPassword, $encodedPassword, $saltPrefixLength = 8)
     {
-        $decodedDigest = hex2bin($encodedPassword);
+        $decodedDigest = pack('H*', $encodedPassword);
         $salt = substr($decodedDigest, 0, $saltPrefixLength);
         $computedDigest = $this->digest($rawPassword, $salt);
         return $decodedDigest === $computedDigest;
@@ -52,11 +52,11 @@ class StandardPasswordEncoder
     private function digest($rawPassword, $salt)
     {
         $utf8RawPassword = mb_convert_encoding($rawPassword, "UTF-8");
-        $digest = $this->hash($utf8RawPassword, $salt);
+        $digest = $this->sha256Hash($utf8RawPassword, $salt);
         return $salt . $digest;
     }
 
-    private function hash($password, $salt)
+    private function sha256Hash($password, $salt)
     {
         $password = $salt . $password;
         for ($j = 0; $j < self::HASH_ITERATIONS; $j++) {
