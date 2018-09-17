@@ -35,8 +35,8 @@ class StandardPasswordEncoder
     /**
      * Encodes a password in the same way as Spring Security's StandardPasswordEncoder with default settings.
      *
-     * @param $rawPassword The password to encode.
-     * @param $salt Optional salt used for encoding the password.
+     * @param $rawPassword string The password to encode.
+     * @param $salt string Optional salt used for encoding the password.
      *              For test-proven results use a random length 8 ASCII string. If not specified it will be auto-provided.
      * @return string The encoded password, ready to be stored in the database.
      */
@@ -66,4 +66,3 @@ class StandardPasswordEncoder
     }
 
 }
-

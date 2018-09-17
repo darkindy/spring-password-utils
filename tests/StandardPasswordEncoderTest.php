@@ -13,6 +13,7 @@ class StandardPasswordEncoderTest extends TestCase
 {
     const ENCODED_PASSWORD = "1ee070812605db4ab1950813a042717eb3f0bdf8395bac71d3eb9b8eeefcd5e86626731b2d41c864";
     const RAW_PASSWORD = "1234";
+    const RAW_BAD_PASSWORD = "12345";
 
     const PASSWORD_TO_ENCODE = "Darkindyß";
     const EXPECTED_ENCODED_PASSWORD = "a840d8c14f8695b51fe596a8ed6e156934460f2637efcc86f6930905deec2578929b6dad2f5ca021";
@@ -41,6 +42,13 @@ class StandardPasswordEncoderTest extends TestCase
     {
         $var = new StandardPasswordEncoder;
         $this->assertTrue($var->matches(self::RAW_PASSWORD, self::ENCODED_PASSWORD) === true);
+        unset($var);
+    }
+
+    public function testMatchesBadPassword()
+    {
+        $var = new StandardPasswordEncoder;
+        $this->assertTrue($var->matches(self::RAW_BAD_PASSWORD, self::ENCODED_PASSWORD) === false);
         unset($var);
     }
 
