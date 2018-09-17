@@ -43,7 +43,7 @@ class StandardPasswordEncoder
     public function encode($rawPassword, $salt = null)
     {
         if (is_null($salt)) {
-            $salt = bin2hex(openssl_random_pseudo_bytes(4));
+            $salt = openssl_random_pseudo_bytes(8);
         }
         $computedDigest = $this->digest($rawPassword, $salt);
         return bin2hex($computedDigest);

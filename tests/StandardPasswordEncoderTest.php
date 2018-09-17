@@ -15,8 +15,20 @@ class StandardPasswordEncoderTest extends TestCase
     private const RAW_PASSWORD = "1234";
 
     private const PASSWORD_TO_ENCODE = "Darkindyß";
-    private const SALT_TO_ENCODE = "1BaHku&7";
-    private const EXPECTED_ENCODED_PASSWORD = "314261486b752637c6b53e6df54f937d229224965d58548a53beba5c4fc001083a5786aaac9cd448";
+    private const EXPECTED_ENCODED_PASSWORD = "a840d8c14f8695b51fe596a8ed6e156934460f2637efcc86f6930905deec2578929b6dad2f5ca021";
+    private const EXPECTED_ENCODED_PASSWORD2 = "4fd886b595a840c1a840d8c14f8695b5d7405efe604c9cbab3dda679752a8c36d0da8d3d3d6c15bf9843fde10f8faf9b";
+
+    private static function SALT_TO_ENCODE()
+    {
+        return call_user_func_array("pack", array_merge(
+            array("C*"), array(-88, 64, -40, -63, 79, -122, -107, -75)));
+    }
+
+    private static function SALT_TO_ENCODE16()
+    {
+        return call_user_func_array("pack", array_merge(
+            array("C*"), array(79, -40, -122, -75, -107, -88, 64, -63, -88, 64, -40, -63, 79, -122, -107, -75)));
+    }
 
     public function testIsThereAnySyntaxError()
     {
@@ -35,14 +47,14 @@ class StandardPasswordEncoderTest extends TestCase
     public function testEncode()
     {
         $var = new StandardPasswordEncoder;
-        $this->assertTrue($var->encode(self::PASSWORD_TO_ENCODE, self::SALT_TO_ENCODE) === self::EXPECTED_ENCODED_PASSWORD);
+        $this->assertTrue($var->encode(self::PASSWORD_TO_ENCODE, self::SALT_TO_ENCODE()) === self::EXPECTED_ENCODED_PASSWORD);
         unset($var);
     }
 
     public function testEncodeThenMatches()
     {
         $var = new StandardPasswordEncoder;
-        $encodedPassword = $var->encode(self::PASSWORD_TO_ENCODE, self::SALT_TO_ENCODE);
+        $encodedPassword = $var->encode(self::PASSWORD_TO_ENCODE, self::SALT_TO_ENCODE());
         $this->assertTrue($var->matches(self::PASSWORD_TO_ENCODE, $encodedPassword) === true);
         unset($var);
     }
@@ -52,6 +64,21 @@ class StandardPasswordEncoderTest extends TestCase
         $var = new StandardPasswordEncoder;
         $encodedPassword = $var->encode(self::PASSWORD_TO_ENCODE);
         $this->assertTrue($var->matches(self::PASSWORD_TO_ENCODE, $encodedPassword) === true);
+        unset($var);
+    }
+
+    public function testEncode16BytesSalt()
+    {
+        $var = new StandardPasswordEncoder;
+        $this->assertTrue($var->encode(self::PASSWORD_TO_ENCODE, self::SALT_TO_ENCODE16()) === self::EXPECTED_ENCODED_PASSWORD2);
+        unset($var);
+    }
+
+    public function testEncodeThenMatches16BytesSalt()
+    {
+        $var = new StandardPasswordEncoder;
+        $encodedPassword = $var->encode(self::PASSWORD_TO_ENCODE, self::SALT_TO_ENCODE16());
+        $this->assertTrue($var->matches(self::PASSWORD_TO_ENCODE, $encodedPassword, 16) === true);
         unset($var);
     }
 
